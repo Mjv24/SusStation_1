@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#04051a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Sus Station — social deduction in space</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="cv" aria-label="Game world"></canvas>
+<canvas id="gl"></canvas>
+<div id="localTag" class="hidden">LOCAL TEST MODE</div>
+
+<div id="home">
+ <header class="launch-nav"><a class="wordmark" href="#" aria-label="Sus Station home"><span class="brand-mark">S</span> SUS STATION <small>ORBITAL EDITION</small></a><div class="nav-actions"><button id="hComfort" class="btn glass small" type="button">Comfort mode</button><button id="hHelp" class="btn glass small" type="button">How to play</button></div></header>
+ <main class="launch-layout">
+ <section class="launch-story" aria-label="Welcome"><div class="eyebrow"><span class="status-dot"></span> YOUR CREW. YOUR ALIBI.</div><h1>Trust is a<br><span>fragile thing.</span></h1><p>A station full of secrets. A crew of your closest friends.<br class="desktop-only"> And someone who doesn't belong.</p><div class="story-tags"><span>01 / COMPLETE TASKS</span><span>02 / WATCH CLOSELY</span><span>03 / FIND THE IMPOSTOR</span></div><div class="hero-caption"><span class="caption-line"></span><div>THE NEXT MISSION STARTS WITH YOU<small>Gather your friends. Leave your innocence at the airlock.</small></div></div></section>
+ <section class="homecard" id="homeCard" aria-label="Create or join a room"><div class="panel-kicker">MISSION CONTROL <span>PRIVATE ROOMS</span></div><div class="brand"><h2>Ready for launch?</h2><div class="tag">Choose your look. Assemble your crew.</div></div>
+ <div class="hrow"><div id="hPrev"></div><div class="hcol"><label class="lbl" for="hName">Call sign</label><input id="hName" class="inp" maxlength="12" placeholder="Your name" autocomplete="nickname"><button id="hCustom" class="btn glass" type="button"><i data-i="shirt"></i> Customize explorer</button></div></div>
+ <div class="hacts"><div id="hCreateWrap"><button id="hCreate" class="btn primary big" type="button"><i data-i="users"></i> CREATE A ROOM <span class="button-arrow">↗</span></button></div><div class="or">Have an invite?</div><div class="hrow tight"><label class="sr-only" for="hCode">Room code</label><input id="hCode" class="inp code" maxlength="5" placeholder="CODE" autocomplete="off"><button id="hJoin" class="btn go" type="button">JOIN</button></div></div>
+ <div id="homeStatus" role="status" aria-live="polite"></div><div class="feats"><span>4–15 players</span><span>5 destinations</span><span>Proximity voice</span></div><div class="foot">Private by room code · Phone + desktop<br>Keep the host's game open during your mission.</div><button id="hPractice" class="practice-link" type="button">Explore solo with practice bots <span>→</span></button></section>
+ <section class="destination-section" aria-label="Mission destinations"><div class="destination-heading"><div><span class="eyebrow">CHOOSE YOUR NEXT MISSION</span><h2>Five worlds. No safe alibis.</h2></div><span class="destination-note">Select a destination before creating a room</span></div><div id="destinationGrid" class="destination-grid"></div></section>
+ </main><footer class="launch-footer"><span>BUILT FOR FRIENDS. DESIGNED FOR SUSPICION.</span><span>WASD / joystick to move · E to interact</span></footer>
+</div>
+<div id="hud" class="hidden">
+  <div id="topL" class="hidden"><div id="taskbar"><div></div><span>TOTAL TASKS COMPLETED</span></div>
+    <div id="tasks"><div id="tasksHead"><span>Tasks</span><span class="chev">▾</span></div><div id="taskList"></div></div></div>
+  <div id="roomTag" class="hidden"></div>
+  <div id="topR">
+    <button class="ib" id="bChat" type="button" title="Chat"><svg class="svgi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg><span class="badge hidden" id="chatBadge">0</span></button>
+    <button class="ib off" id="bMic" type="button" title="Microphone"></button>
+    <button class="ib" id="bSpk" type="button" title="Voice audio"></button>
+    <button class="ib" id="bMap" type="button" title="Map (M)" data-i="map"></button>
+    <button class="ib" id="bMenu" type="button" title="Menu" data-i="menu"></button>
+  </div>
+  <div id="netpill" class="hidden"></div>
+  <div id="sabBanner" class="hidden"></div>
+  <div id="ventNav" class="hidden"></div>
+  <div id="acts">
+    <button class="ab" id="bUse" type="button"></button>
+    <button class="ab" id="bReport" type="button"></button>
+    <button class="ab" id="bKill" type="button"></button>
+    <button class="ab" id="bVent" type="button"></button>
+    <button class="ab" id="bSabo" type="button"></button>
+    <button class="ab" id="bAb" type="button"></button>
+  </div>
+  <div id="lobbyBar" class="hidden">
+    <button id="lbCode" type="button" title="Copy invite link"><i data-i="link"></i> <span id="lbCodeT"></span></button>
+    <span id="lbCount"></span>
+    <button class="btn glass" id="lbCustom" type="button"><i data-i="shirt"></i> Wardrobe</button>
+    <button class="btn glass" id="lbSettings" type="button">Settings</button>
+    <button class="btn glass small" id="lbBotAdd" type="button">+ <i data-i="bot"></i></button>
+    <button class="btn glass small" id="lbBotRem" type="button">− <i data-i="bot"></i></button>
+    <button class="btn go" id="lbStart" type="button">START</button>
+    <span id="lbWait">Waiting for host to start…</span>
+  </div>
+</div>
+<div id="chatPanel" class="hidden"><div class="chead"><span>Chat</span><button class="btn small glass" id="chatX" type="button">✕</button></div><div class="clog" id="chatLog"></div>
+  <form class="cform" id="chatForm"><input id="chatIn" class="inp" maxlength="140" placeholder="Type a message…" autocomplete="off"><button class="btn primary">Send</button></form></div>
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="mTitle"><div class="mpanel"><div class="mhead"><span id="mTitle"></span><button class="mclose" id="mClose" type="button">✕</button></div><div id="mBody"></div></div></div>
+<div id="meet" class="hidden"></div>
+<div id="fx" class="fx hidden"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="rot" class="hidden"><span data-i="rotate"></span> Rotate your phone for the best view <button type="button" id="rotX">✕</button></div>
+
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>window.Peer||document.write('<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"><\/script>')</script>
+<script src="js/util.js"></script>
+<script src="js/maps.js"></script>
+<script src="js/cosmetics.js"></script>
+<script src="js/net.js"></script>
+<script src="js/host.js"></script>
+<script src="js/client.js"></script>
+<script src="js/render.js"></script>
+<script src="js/world3d.js"></script>
+<script src="js/postfx.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/voice.js"></script>
+<script src="js/main.js"></script>
+<script src="js/polish.js"></script>
+<script src="js/boot.js"></script>
+</body>
+</html>
