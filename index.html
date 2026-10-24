@@ -86,5 +86,58 @@
 <script src="js/main.js"></script>
 <script src="js/polish.js"></script>
 <script src="js/boot.js"></script>
+ <script>
+(() => {
+  function initFullscreen() {
+    // Avoid duplicates if you added the previous button.
+    let button = document.getElementById("hFullscreen");
+    if (!button) {
+      const actions = document.querySelector("#home .nav-actions");
+      if (!actions) return;
+      button = document.createElement("button");
+      button.id = "hFullscreen";
+      button.type = "button";
+      button.className = "btn glass small";
+      actions.prepend(button);
+    }
+    if (button.dataset.fullscreenReady) return;
+    button.dataset.fullscreenReady = "true";
+    const root = document.documentElement;
+    function updateLabel() {
+      const active = Boolean(document.fullscreenElement);
+      button.textContent = active
+        ? "Exit fullscreen"
+        : "Fullscreen";
+      button.setAttribute("aria-pressed", String(active));
+    }
+    button.addEventListener("click", async () => {
+      try {
+        if (document.fullscreenElement) {
+          await document.exitFullscreen();
+        } else if (root.requestFullscreen) {
+          await root.requestFullscreen({
+            navigationUI: "hide"
+          });
+        } else {
+          button.textContent = "Fullscreen unsupported";
+        }
+      } catch {
+        button.textContent = "Try fullscreen again";
+      }
+    });
+    document.addEventListener("fullscreenchange", updateLabel);
+    updateLabel();
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initFullscreen,
+      { once: true }
+    );
+  } else {
+    initFullscreen();
+  }
+})();
+</script>
 </body>
 </html>
