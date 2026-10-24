@@ -1,0 +1,69 @@
+{
+  "results": [
+    {
+      "test": "Host cannot start alone",
+      "passed": true
+    },
+    {
+      "test": "Four human browser peers share one room",
+      "passed": true
+    },
+    {
+      "test": "Four-player game starts and snapshots arrive",
+      "passed": true
+    },
+    {
+      "test": "Meeting voting cards render for every player",
+      "passed": true
+    },
+    {
+      "test": "Skip vote confirms through authoritative host",
+      "passed": true
+    },
+    {
+      "test": "Host validation: blocked",
+      "passed": true
+    },
+    {
+      "test": "Host validation: invalid",
+      "passed": true
+    },
+    {
+      "test": "Host validation: dead",
+      "passed": true
+    },
+    {
+      "test": "Home layout fits 320x700",
+      "passed": true
+    },
+    {
+      "test": "Home layout fits 390x844",
+      "passed": true
+    },
+    {
+      "test": "Home layout fits 844x390",
+      "passed": true
+    },
+    {
+      "test": "Home layout fits 1024x768",
+      "passed": true
+    },
+    {
+      "test": "Home layout fits 1920x1080",
+      "passed": true
+    },
+    {
+      "test": "Task completion ignored after dialog cleanup",
+      "passed": true
+    },
+    {
+      "test": "No delayed task completion after close",
+      "passed": true
+    },
+    {
+      "test": "No uncaught extended-test browser errors",
+      "passed": true
+    }
+  ],
+  "errors": []
+}

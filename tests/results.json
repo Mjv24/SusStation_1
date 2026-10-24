@@ -1,0 +1,73 @@
+{
+  "results": [
+    {
+      "test": "Home boots and five destination buttons render",
+      "passed": true
+    },
+    {
+      "test": "How-to dialog opens",
+      "passed": true
+    },
+    {
+      "test": "Wardrobe has five categories",
+      "passed": true
+    },
+    {
+      "test": "Practice creates host plus five bots",
+      "passed": true
+    },
+    {
+      "test": "Selected map applied to host",
+      "passed": true
+    },
+    {
+      "test": "Second browser tab joins same room",
+      "passed": true
+    },
+    {
+      "test": "Host starts selected map for both peers",
+      "passed": true
+    },
+    {
+      "test": "Comfort preference available in menu",
+      "passed": true
+    },
+    {
+      "test": "Simulated client drop reconnects with same identity",
+      "passed": true
+    },
+    {
+      "test": "Play Again retains client in original room",
+      "passed": true
+    },
+    {
+      "test": "Second round starts without creating a new room",
+      "passed": true
+    },
+    {
+      "test": "All five maps render",
+      "passed": true
+    },
+    {
+      "test": "All task mini-games mount and clean up",
+      "passed": true
+    },
+    {
+      "test": "Mobile home has no horizontal overflow",
+      "passed": true
+    },
+    {
+      "test": "Mobile lobby controls fit viewport",
+      "passed": true
+    },
+    {
+      "test": "Landscape lobby controls fit viewport",
+      "passed": true
+    },
+    {
+      "test": "No uncaught browser JavaScript errors",
+      "passed": true
+    }
+  ],
+  "errors": []
+}
